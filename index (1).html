@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Maqsudomics</title>
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f7f4ec;--panel:#fff;--ink:#0b1b3b;--mute:#55627f;--line:#e3dccb;--navy:#0b1b3b;--navy2:#13295a;--gold:#c9a24a;--gold2:#e6c476;--on-navy:#f4efe2;--soft:#fbf6e6;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;--bg:#07122b;--panel:#0d1f44;--ink:#f1ecde;--mute:#a4b0cc;--line:#1f3366;--soft:#10244f}}
+:root[data-theme="dark"]{color-scheme:dark;--bg:#07122b;--panel:#0d1f44;--ink:#f1ecde;--mute:#a4b0cc;--line:#1f3366;--soft:#10244f}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*:before,*:after{box-sizing:inherit}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.65 Inter,system-ui,-apple-system,"Segoe UI",sans-serif}
+h1,h2,h3,.logo{font-family:"Playfair Display",Georgia,serif;letter-spacing:-.01em}
+a{color:inherit}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--navy);z-index:20}
+header{position:sticky;top:env(safe-area-inset-top,0px);background:var(--navy);z-index:10;border-bottom:1px solid rgba(201,162,74,.35)}
+.bar{max-width:1060px;margin:0 auto;padding:0 20px;height:64px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.logo{font-size:22px;font-weight:700;color:var(--on-navy);text-decoration:none}
+.logo b{color:var(--gold2)}
+nav{display:flex;gap:4px}
+nav a{color:#c3cbe0;text-decoration:none;font-size:14.5px;font-weight:500;padding:8px 14px;border-radius:99px}
+nav a:hover{color:#fff}
+nav a.on{background:var(--gold);color:var(--navy)}
+.wrap{max-width:1060px;margin:0 auto;padding:0 20px}
+.page{display:none;animation:in .35s ease}
+.page.show{display:block}
+@keyframes in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.hero{background:radial-gradient(900px 400px at 80% -10%,#1d3a7d 0,transparent 60%),var(--navy);color:var(--on-navy);padding:84px 0 92px}
+.eyebrow{display:inline-block;color:var(--gold2);font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;margin-bottom:16px}
+.hero h1{font-size:clamp(38px,7vw,68px);line-height:1.06;margin:0 0 18px;max-width:780px}
+.hero h1 em{font-style:normal;color:var(--gold2)}
+.hero p{max-width:560px;color:#c3cbe0;font-size:18px;margin:0 0 30px}
+.btn{display:inline-block;background:linear-gradient(135deg,var(--gold2),var(--gold));color:var(--navy);border:0;padding:12px 24px;border-radius:99px;font:600 15px Inter,system-ui,sans-serif;cursor:pointer;text-decoration:none}
+.btn:hover{filter:brightness(1.06)}
+.btn.line{background:transparent;color:var(--gold2);border:1.5px solid var(--gold)}
+.btn:disabled{opacity:.6;cursor:wait}
+.sec{padding:56px 0}
+.head{background:var(--navy);color:var(--on-navy);padding:48px 0}
+.head h1{margin:0 0 6px;font-size:clamp(30px,5vw,44px)}
+.head p{margin:0;color:#c3cbe0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:22px;transition:transform .2s,box-shadow .2s}
+.card:hover{transform:translateY(-3px);box-shadow:0 14px 30px -18px rgba(11,27,59,.5)}
+.card h3{margin:8px 0;font-size:20px}
+.card p{margin:0 0 16px;color:var(--mute);font-size:15px}
+.tag{display:inline-block;background:var(--soft);color:#9b7a22;border:1px solid var(--line);font-size:12px;font-weight:600;padding:3px 11px;border-radius:99px}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .tag{color:var(--gold2)}}
+.thumb{aspect-ratio:16/9;border-radius:12px;background:linear-gradient(135deg,var(--navy2),var(--navy));display:grid;place-items:center;margin-bottom:14px;color:var(--gold2);font-size:34px;border:1px solid rgba(201,162,74,.3)}
+.hw{margin-bottom:20px}
+.hw .top{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:center}
+.hw h3{margin:0;font-size:21px}
+.q{border-left:3px solid var(--gold);background:var(--soft);padding:14px 16px;border-radius:0 12px 12px 0;margin:14px 0}
+textarea{width:100%;min-height:120px;padding:14px;border:1px solid var(--line);border-radius:12px;background:var(--bg);color:var(--ink);font:15px/1.5 Inter,system-ui,sans-serif;resize:vertical}
+textarea:focus{outline:2px solid var(--gold);border-color:transparent}
+.row{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+.hw .btn.line{color:#9b7a22}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .hw .btn.line{color:var(--gold2)}}
+.out{display:none;margin-top:16px;padding:16px;background:var(--bg);border:1px solid var(--line);border-radius:12px;white-space:pre-wrap;font-size:15px}
+.note{border:1.5px dashed var(--gold);border-radius:14px;padding:16px 18px;color:var(--mute);background:var(--soft);font-size:14.5px;margin-bottom:24px}
+.founder{display:grid;grid-template-columns:120px 1fr;gap:24px;align-items:center}
+.avatar{width:120px;height:120px;border-radius:50%;background:linear-gradient(135deg,var(--gold2),var(--gold));display:grid;place-items:center;font:700 40px "Playfair Display",Georgia,serif;color:var(--navy)}
+@media (max-width:560px){.founder{grid-template-columns:1fr}nav a{padding:7px 10px;font-size:13.5px}.logo{font-size:19px}}
+footer{background:var(--navy);color:#a9b4d0;padding:28px 0;font-size:14px}
+footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+</style>
+</head>
+<body>
+<header><div class="bar">
+  <a class="logo" href="#home">Maqsud<b>omics</b></a>
+  <nav id="nav"><a href="#home" data-p="home">Home</a><a href="#lessons" data-p="lessons">Lessons</a><a href="#homework" data-p="homework">Homework</a><a href="#about" data-p="about">About</a></nav>
+</div></header>
+
+<!-- HOME -->
+<main>
+<div class="page" id="p-home">
+  <div class="hero"><div class="wrap">
+    <span class="eyebrow">Economics · Maqsudxon Umarxonov</span>
+    <h1>Understand <em>economics</em>, one lesson at a time.</h1>
+    <p>Video lessons, homework practice, and AI feedback on your mistakes.</p>
+    <a class="btn" href="#lessons">Watch lessons</a> <a class="btn line" href="#homework">Practise now</a>
+  </div></div>
+  <div class="sec wrap"><div class="grid">
+    <a class="card" href="#lessons" style="text-decoration:none"><span class="tag">Learn</span><h3>Video lessons</h3><p>Watch the lessons from the channel.</p></a>
+    <a class="card" href="#homework" style="text-decoration:none"><span class="tag">Practise</span><h3>Homework</h3><p>Answer questions and get AI feedback on your mistakes.</p></a>
+    <a class="card" href="#about" style="text-decoration:none"><span class="tag">Meet</span><h3>About</h3><p>Who is behind Maqsudomics.</p></a>
+  </div></div>
+</div>
+
+<!-- LESSONS -->
+<div class="page" id="p-lessons">
+  <div class="head"><div class="wrap"><h1>Video lessons</h1><p>Every lesson opens on YouTube.</p></div></div>
+  <div class="sec wrap">
+    <div class="note">These are sample cards. Send me your real lesson titles and YouTube links and I’ll replace them.</div>
+    <div class="grid" id="lessonGrid"></div>
+  </div>
+</div>
+
+<!-- HOMEWORK -->
+<div class="page" id="p-homework">
+  <div class="head"><div class="wrap"><h1>Homework &amp; practice</h1><p>Write your answer, then get AI feedback on your mistakes.</p></div></div>
+  <div class="sec wrap">
+    <div class="note">These are sample questions. Send me your real homework and video explanation links and I’ll replace them.</div>
+    <div id="hwList"></div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<div class="page" id="p-about">
+  <div class="head"><div class="wrap"><h1>About</h1><p>The person behind Maqsudomics.</p></div></div>
+  <div class="sec wrap"><div class="card founder">
+    <div class="avatar">MU</div>
+    <div><h3 style="margin:0">Maqsudxon Umarxonov</h3><p style="margin:4px 0 12px;color:#9b7a22;font-weight:600">Founder, Maqsudomics</p>
+    <p style="margin:0">Your story goes here. Tell me what you’d like to say and I’ll write it into this page.</p></div>
+  </div></div>
+</div>
+</main>
+
+<footer><div class="wrap"><span>© Maqsudomics</span><span>Founded by Maqsudxon Umarxonov</span></div></footer>
+
+<script>
+// ===== EDIT HERE: sample content, replace with real lessons and homework =====
+const LESSONS=[
+ {t:"Sample lesson 1",tag:"Topic",d:"Short description of the lesson.",u:"https://www.youtube.com/"},
+ {t:"Sample lesson 2",tag:"Topic",d:"Short description of the lesson.",u:"https://www.youtube.com/"},
+ {t:"Sample lesson 3",tag:"Topic",d:"Short description of the lesson.",u:"https://www.youtube.com/"}];
+const HOMEWORK=[
+ {t:"Sample homework 1",l:"Lesson 1",q:"A new study shows coffee is healthy. What happens to the equilibrium price and quantity of coffee? Explain with a demand and supply shift.",v:"https://www.youtube.com/"},
+ {t:"Sample homework 2",l:"Lesson 2",q:"Prices rose from 200 to 210 over one year. Calculate the inflation rate and explain what it means for buyers.",v:"https://www.youtube.com/"}];
+// ==============================================================================
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+document.getElementById('lessonGrid').innerHTML=LESSONS.map(l=>`<div class="card"><div class="thumb">▶</div><span class="tag">${esc(l.tag)}</span><h3>${esc(l.t)}</h3><p>${esc(l.d)}</p><a class="btn" href="${esc(l.u)}" target="_blank" rel="noopener">Watch on YouTube</a></div>`).join('');
+document.getElementById('hwList').innerHTML=HOMEWORK.map((h,i)=>`<div class="card hw"><div class="top"><h3>${esc(h.t)}</h3><span class="tag">${esc(h.l)}</span></div><div class="q">${esc(h.q)}</div><textarea id="a${i}" placeholder="Write your answer here…"></textarea><div class="row"><button class="btn" id="b${i}" onclick="analyse(${i})">Analyse my mistakes</button><a class="btn line" href="${esc(h.v)}" target="_blank" rel="noopener">Video explanation</a></div><div class="out" id="o${i}"></div></div>`).join('');
+
+function route(){
+  let p=(location.hash||'#home').slice(1);
+  if(!document.getElementById('p-'+p))p='home';
+  document.querySelectorAll('.page').forEach(e=>e.classList.toggle('show',e.id==='p-'+p));
+  document.querySelectorAll('#nav a').forEach(a=>a.classList.toggle('on',a.dataset.p===p));
+  window.scrollTo(0,0);
+}
+addEventListener('hashchange',route);route();
+
+async function analyse(i){
+  const h=HOMEWORK[i],out=document.getElementById('o'+i),btn=document.getElementById('b'+i);
+  const ans=document.getElementById('a'+i).value.trim();
+  out.style.display='block';
+  if(!ans){out.textContent='Please write your answer first.';return}
+  btn.disabled=true;out.textContent='Analysing your answer…';
+  try{
+    const res=await fetch('/.netlify/functions/analyse',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({question:h.q,answer:ans})});
+    const data=await res.json();
+    out.textContent=res.ok?data.text:(data.error||'The AI helper failed. Please try again.');
+  }catch(e){
+    out.textContent='Could not reach the AI helper. Check your internet and try again.';
+  }finally{btn.disabled=false}
+}
+</script>
+</body>
+</html>
